@@ -1,29 +1,31 @@
+require "./lib/print"
+
 class Main
   def display_main_menu
-
-    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
-    print "> "
-    get_user_selection(gets.chomp)
- 
+    Print.instructions
   end
 
-  def get_user_selection(user_selection)
+  def get_user_selection
+    get_user_selection(gets.chomp)
+  end
+
+  def process_user_selection(user_selection)
     case user_selection
     when "p"
-      puts "new_game not yet implemented"
-      # set 
+      puts "new game not yet implemented"
+      "new game not yet implemented"
     when "i"
-      puts "display_instructions not yet implemented"
-      # display_instructions
+      Print.instructions
     when "q"
       exit
     else
-      puts "Sorry, that is not a valid choice."
+      Print.invalid_input
     end
   end
 
+  def play_game
+  end
 end
 
 
-main = Main.new
-main.display_main_menu
+
