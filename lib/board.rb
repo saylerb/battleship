@@ -20,10 +20,6 @@ class Board
     
   end
 
-
-  def set_computer
-  end
-
   def validate_ship
   end
 

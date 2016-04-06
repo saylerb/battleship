@@ -1,4 +1,5 @@
 require "./lib/print"
+require "./lib/game"
 
 class Main
   def display_main_menu
@@ -12,7 +13,7 @@ class Main
   def process_user_selection(user_selection)
     case user_selection
     when "p"
-      play_game
+      Game.new.play
     when "i"
       Print.instructions
     when "q"
@@ -22,15 +23,5 @@ class Main
     end
   end
 
-
-  def computer_ship_placement
-  end
-
-
-  def play_game
-    "playing"
-  end
 end
-
-
 
