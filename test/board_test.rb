@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './test/test_helper'
 require './lib/board'
+require './lib/ship'
 require './lib/print'
 
 class BoardTest < Minitest::Test
@@ -21,7 +22,7 @@ class BoardTest < Minitest::Test
   def test_that_board_contains_elements
     # puts @board.grid.inspect
     assert @board.grid.flatten[0]
-    assert_equal @board.grid.flatten[0].value, "O"
+    assert_equal @board.grid.flatten[0].value, '?'
   end
 
   def test_that_board_displays_properly
@@ -38,6 +39,18 @@ class BoardTest < Minitest::Test
     assert_equal ["A","B","C","D"], @board.row_header
   end
 
+  def test_placing_ship_on_board
+    @board.add_ship(0, 0)
+    assert_equal @board.grid[0][0].class, Ship
+  end
+
+  def test_is_valid_ship_placement_on_board
+    skip
+  end
+
+  def test_is_not_overlapping_with_other_ships
+    skip
+  end
 
 
 end
