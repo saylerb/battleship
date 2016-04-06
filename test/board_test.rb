@@ -9,20 +9,20 @@ class BoardTest < Minitest::Test
   def setup
     @board = Board.new
   end
-  
+
   def test_if_board_exists
     assert @board
   end
 
   def test_that_board_has_a_size
-    assert_equal 4, @board.grid.length 
+    assert_equal 4, @board.grid.length
   end
 
   def test_that_board_contains_elements
-    #puts @board.grid.inspect
-    assert @board.grid.flatten.include?("O")
+    # puts @board.grid.inspect
+    assert @board.grid.flatten[0]
+    assert_equal @board.grid.flatten[0].value, "O"
   end
-
 
   def test_that_board_displays_properly
     @board.display_grid

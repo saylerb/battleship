@@ -25,3 +25,6 @@ class Main
 
 end
 
+# main = Main.new
+# main.display_main_menu
+# main.get_user_selection

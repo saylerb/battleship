@@ -3,11 +3,11 @@ class Board
 
   def initialize
 
-    total_ships = 2 
+    total_ships = 2
     board_size = 4
     @column_header = *(1..4)
     @row_header = *("A".."D")
-    @grid = Array.new(board_size).map! { Array.new(board_size) {"O"}}
+    @grid = Array.new(board_size).map! { Array.new(board_size) {Cell.new}}
   end
 
   def display_grid
@@ -17,16 +17,29 @@ class Board
       print @row_header[index] + " "
       puts @grid[index].each { |cell| cell }.join(" ")
     end
-    
-  end
 
-  def validate_ship
   end
-
-  def validate_overlap
-  end
-
-  # check for valid coordinates
-  # check for conflicts with other ships
 end
 
+class Cell
+  attr_reader :value
+    def initialize
+      @value = "O"
+    end
+end
+
+#
+#   def place_ship
+#   end
+#
+#
+#   def validate_ship
+#
+#   end
+#
+#   def validate_overlap
+#   end
+#
+#   # check for valid coordinates
+#   # check for conflicts with other ships
+# end
