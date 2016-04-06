@@ -5,19 +5,22 @@ require './lib/main'
 require './lib/print'
 
 class MainTest < Minitest::Test
+
+  def setup
+    @main = Main.new
+  end
+
+
   def test_if_main_exists
-    main = Main.new
-    assert main
+    assert @main
   end
 
   def test_that_menu_controls_work
-    main = Main.new
-    assert main.display_main_menu.include?("BATTLESHIP")
+    assert @main.display_main_menu.include?("BATTLESHIP")
   end
 
-  def test_user_selection
-    main = Main.new
-    assert main.process_user_selection("p").include?("new game")
+  def test_that_game_started_when_player_select_p
+    assert @main.process_user_selection("p").include?("playing")
   end
 
 

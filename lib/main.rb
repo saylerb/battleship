@@ -12,8 +12,7 @@ class Main
   def process_user_selection(user_selection)
     case user_selection
     when "p"
-      puts "new game not yet implemented"
-      "new game not yet implemented"
+      play_game
     when "i"
       Print.instructions
     when "q"
@@ -23,7 +22,13 @@ class Main
     end
   end
 
+
+  def computer_ship_placement
+  end
+
+
   def play_game
+    "playing"
   end
 end
 
