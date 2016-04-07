@@ -78,6 +78,10 @@ class BoardTest < Minitest::Test
   end
 
   def test_is_not_overlapping_with_other_ships
+    @board.add_ship([0, 0])
+    @board.add_ship([1, 2])
+    assert @board.is_occupied?([0, 0])
+    assert @board.is_occupied?([1, 2])
 
   end
 

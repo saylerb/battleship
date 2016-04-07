@@ -37,10 +37,9 @@ class Board
     @columns.include?(column)
   end
 
-
-  def convert_coord(string)
-    row, column = string[0], string[1]
-    [@rows.index(row), string[1].to_i-1]
+  def convert_coord(coord)
+    row, column = coord[0], coord[1]
+    [@rows.index(row), column.to_i-1]
   end
 
   def add_ship(coord)
@@ -50,6 +49,11 @@ class Board
 
   def is_position_on_board?(coord)
      coord.first.between?(0, 4) && coord.first.between?(0, 4)
+  end
+
+  def is_occupied?(coord)
+    row, column = coord[0], coord[1]
+    @grid[row][column].include?('S')
   end
 
 end
