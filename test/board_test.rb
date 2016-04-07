@@ -31,45 +31,54 @@ class BoardTest < Minitest::Test
   end
 
   def test_that_board_has_column_header
-    assert @board.column_header
-    assert_equal [1, 2, 3, 4], @board.column_header
+    assert @board.columns
+    assert_equal [1, 2, 3, 4], @board.columns
   end
 
   def test_that_board_has_row_header
-    assert @board.row_header
-    assert_equal ["A","B","C","D"], @board.row_header
+    assert @board.rows
+    assert_equal ["A","B","C","D"], @board.rows
   end
 
   def test_placing_ship_on_board
     coord = [2, 3]
     @board.add_ship(coord)
     assert_equal @board.grid[coord.first][coord.last], "S"
-    @board.display_grid
+    # @board.display_grid
   end
 
-  def test_convert_to_coordinates
-    coord_1 = @board.convert_to_coordinates("A1")
+  def test_convert_coord
+    coord_1 = @board.convert_coord("A1")
     assert_equal [0, 0], coord_1
 
-    coord_2 = @board.convert_to_coordinates("B2")
+    coord_2 = @board.convert_coord("B2")
     assert_equal  [1, 1], coord_2
 
-    coord_3 = @board.convert_to_coordinates("C3")
+    coord_3 = @board.convert_coord("C3")
     assert_equal  [2, 2], coord_3
 
-    coord_4 = @board.convert_to_coordinates("D2")
+    coord_4 = @board.convert_coord("D2")
     assert_equal  [3, 1], coord_4
     @board.display_grid
   end
 
+  def test_is_position_on_board?
+    assert @board.is_position_on_board?(@board.convert_coord("A1"))
+    assert @board.is_position_on_board?(@board.convert_coord("B2"))
+    assert @board.is_position_on_board?(@board.convert_coord("C4"))
+    assert @board.is_position_on_board?(@board.convert_coord("A1"))
+  end
 
-  def test_is_valid_ship_placement_on_board
-    skip
-    @board.display_grid
+  def test_is_valid_rows_and_columns
+    assert @board.valid_row?("A")
+    refute @board.valid_row?("Z")
+
+    assert @board.valid_column?(4)
+    refute @board.valid_column?(5)
   end
 
   def test_is_not_overlapping_with_other_ships
-    skip
+
   end
 
   def test_is_afraid_one_with_others

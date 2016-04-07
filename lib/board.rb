@@ -1,12 +1,12 @@
 class Board
-  attr_reader :column_header, :row_header, :grid
+  attr_reader :columns, :rows, :grid
 
   def initialize
 
     total_ships = 2
     board_size = 4
-    @column_header = *(1..4)
-    @row_header = *("A".."D")
+    @columns = *(1..4)
+    @rows = *("A".."D")
     @grid = Array.new(board_size).map! { Array.new(board_size) {"."}}
     @ships = Array.new
   end
@@ -14,18 +14,33 @@ class Board
   def display_grid
     puts ""
     print "  "
-    print @column_header.each { |cell| cell }.join(" ")
+    print @columns.each { |cell| cell }.join(" ")
     puts ""
     @grid.each_index do |index|
-      print @row_header[index] + " "
+      print @rows[index] + " "
       puts @grid[index].each { |cell| cell }.join(" ")
     end
     puts ""
   end
 
-  def convert_to_coordinates(string)
-    row = {"A" => 0, "B" => 1, "C" => 2, "D" => 3}
-    [row[string[0]],string[1].to_i-1]
+  def valid_input?(string)
+    row, column = string[0], string[1]
+    @rows.include?(row) && @column.include?(column)
+    # if rowinclude?(string[0]) && string[1]
+  end
+
+  def valid_row?(row)
+    @rows.include?(row)
+  end
+
+  def valid_column?(column)
+    @columns.include?(column)
+  end
+
+
+  def convert_coord(string)
+    row, column = string[0], string[1]
+    [@rows.index(row), string[1].to_i-1]
   end
 
   def add_ship(coord)
@@ -34,7 +49,7 @@ class Board
   end
 
   def is_position_on_board?(coord)
-    @grid  
+     coord.first.between?(0, 4) && coord.first.between?(0, 4)
   end
 
 end
