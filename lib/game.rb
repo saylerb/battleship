@@ -80,7 +80,7 @@ class Game
       elsif all_computer_ships_are_belong_to_human
         @game_over = true
       else
-        puts "Keep playing bitches!"
+        puts "Keep playing!"
       end
     end
   end

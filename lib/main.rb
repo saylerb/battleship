@@ -4,7 +4,7 @@ require "./lib/game"
 class Main
 
   attr_accessor :current_game
-  
+
   def initialize
     @current_game = nil
   end
@@ -20,9 +20,9 @@ while true
 
   if user_selection == "p"
       main.current_game = Game.new
-      if main.current_game.play
-        puts "we are playing the game!"
-      end
+
+      main.current_game.play
+
   elsif user_selection == "i"
       puts Print.instructions
   elsif user_selection == "q"
