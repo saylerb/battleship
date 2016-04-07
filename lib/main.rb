@@ -2,29 +2,34 @@ require "./lib/print"
 require "./lib/game"
 
 class Main
-  def display_main_menu
-    Print.instructions
-  end
 
-  def get_user_selection
-    get_user_selection(gets.chomp)
-  end
-
-  def process_user_selection(user_selection)
-    case user_selection
-    when "p"
-      Game.new.play
-    when "i"
-      Print.instructions
-    when "q"
-      exit
-    else
-      Print.invalid_input
-    end
+  attr_accessor :current_game
+  
+  def initialize
+    @current_game = nil
   end
 
 end
 
-# main = Main.new
-# main.display_main_menu
-# main.get_user_selection
+
+while true
+  main = Main.new
+  puts Print.welcome
+
+  user_selection = gets.chomp.downcase
+
+  if user_selection == "p"
+      main.current_game = Game.new
+      if main.current_game.play
+        puts "we are playing the game!"
+      end
+  elsif user_selection == "i"
+      puts Print.instructions
+  elsif user_selection == "q"
+      puts "Sorry to see you go!"
+      exit
+  else
+    puts Print.invalid_input
+  end
+
+end
