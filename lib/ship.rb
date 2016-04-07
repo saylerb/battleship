@@ -2,8 +2,8 @@ class Ship
 
   attr_accessor :position, :sunk, :hits
 
-  def initialize(x, y)
-    @position = [x, y]
+  def initialize(coord)
+    @position = [coord[0], coord[1]]
     @hits = 0
     @sunk = false
   end

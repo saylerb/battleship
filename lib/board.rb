@@ -7,7 +7,8 @@ class Board
     board_size = 4
     @column_header = *(1..4)
     @row_header = *("A".."D")
-    @grid = Array.new(board_size).map! { Array.new(board_size) {Cell.new}}
+    @grid = Array.new(board_size).map! { Array.new(board_size) {"."}}
+    @ships = Array.new
   end
 
   def display_grid
@@ -22,22 +23,18 @@ class Board
     puts ""
   end
 
-  def add_ship(x, y)
-    @grid[x][y] = Ship.new(x, y)
+  def convert_to_coordinates(string)
+    row = {"A" => 0, "B" => 1, "C" => 2, "D" => 3}
+    [row[string[0]],string[1].to_i-1]
   end
 
-  def is_position_on_board?(x, y)
+  def add_ship(coord)
+    @ships << Ship.new(coord)
+    @grid[coord.first][coord.last] = 'S'
   end
 
-end
-
-class Cell
-  attr_reader :value
-  attr_accessor :occupied
-
-  def initialize
-    @value = "?"
-    @occupied = false
+  def is_position_on_board?(coord)
+    @grid  
   end
 
 end
