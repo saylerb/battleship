@@ -4,7 +4,6 @@ require "./lib/game"
 class Main
 
   attr_accessor :current_game
-
   def initialize
     @current_game = nil
   end

@@ -18,23 +18,8 @@ class Game
     @playing = true
     @game_over = false
 
-    comp_x1 = @random_generator.rand(4)
-    comp_y1 = @random_generator.rand(4)
-    puts "computer's 1st ship position: (#{comp_x1},#{comp_y1})"
-    @computer_board.add_ship([comp_x1,comp_y1])
+    set_computer_board
 
-    valid = false
-    until valid
-      comp_x2 = @random_generator.rand(4)
-      comp_y2 = @random_generator.rand(4)
-      puts "computer's 2nd ship position: (#{comp_x2},#{comp_y2})"
-      @computer_board.add_ship([comp_x2,comp_y2])
-      if (comp_x1 != comp_x2) || (comp_y1 != comp_y2)
-        valid = true
-      end
-    end
-
-    puts "Human goes first"
     puts Print.ship_placement_instructions
 
     print "enter x1: "
@@ -57,8 +42,6 @@ class Game
     puts "boards are set!(?) ready to play!"
 
     until @game_over
-
-
 
       puts "COMPUTER:"
       @computer_board.display_grid
@@ -86,12 +69,23 @@ class Game
   end
 
 
-      # def create_computer_board
-  #   Board.new
-  # end
-  #
-  # def create_player_board
-  #   Array.new
-  # end
+
+  def set_computer_board
+    comp_x1 = @random_generator.rand(4)
+    comp_y1 = @random_generator.rand(4)
+    puts "computer's 1st ship position: (#{comp_x1},#{comp_y1})"
+    @computer_board.add_ship([comp_x1,comp_y1])
+
+    valid = false
+    until valid
+      comp_x2 = @random_generator.rand(4)
+      comp_y2 = @random_generator.rand(4)
+      puts "computer's 2nd ship position: (#{comp_x2},#{comp_y2})"
+      @computer_board.add_ship([comp_x2,comp_y2])
+      if (comp_x1 != comp_x2) || (comp_y1 != comp_y2)
+        valid = true
+      end
+    end
+  end
 
 end
