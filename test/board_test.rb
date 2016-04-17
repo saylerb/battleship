@@ -25,11 +25,6 @@ class BoardTest < Minitest::Test
     assert_equal @board.grid.flatten[0], "."
   end
 
-  def test_that_board_displays_properly
-    skip
-    @board.display_grid
-  end
-
   def test_that_board_has_column_header
     assert @board.columns
     assert_equal [1, 2, 3, 4], @board.columns
@@ -44,7 +39,6 @@ class BoardTest < Minitest::Test
     coord = [2, 3]
     @board.add_ship(coord)
     assert_equal @board.grid[coord.first][coord.last], "S"
-    # @board.display_grid
   end
 
   def test_convert_coord
@@ -59,7 +53,7 @@ class BoardTest < Minitest::Test
 
     coord_4 = @board.convert_coord("D2")
     assert_equal  [3, 1], coord_4
-    @board.display_grid
+  #  @board.display_grid
   end
 
   def test_is_position_on_board?
@@ -82,11 +76,6 @@ class BoardTest < Minitest::Test
     @board.add_ship([1, 2])
     assert @board.is_occupied?([0, 0])
     assert @board.is_occupied?([1, 2])
-
-  end
-
-  def test_is_afraid_one_with_others
-    skip
   end
 
 

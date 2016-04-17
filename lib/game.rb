@@ -51,12 +51,15 @@ class Game
   end
 
   def set_human_board
-    print "enter x1: "
-    x1 = gets.chomp.to_i
-    print "enter y1: "
-    y1 = gets.chomp.to_i
+    print "Please enter the squares for your first two-unit ship"
+    selection = gets.chomp
+    
+    @human_board.convert_coord
 
     @human_board.add_ship([x1,y1])
+
+
+    print "Please enter the squares for your second two-unit ship"
 
     print "enter x2: "
     x2 = gets.chomp.to_i
@@ -66,6 +69,7 @@ class Game
     if (x1 != x2) || (y1 != y2)
         human_valid = true
     end
+
     @human_board.add_ship([x2,y2])
     puts "boards are set!(?) ready to play!"
   end
