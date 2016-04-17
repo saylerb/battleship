@@ -9,6 +9,7 @@ class Board
     @rows = *("A".."D")
     @grid = Array.new(board_size).map! { Array.new(board_size) {"."}}
     @ships = Array.new
+    @hits = Array.new
   end
 
   def display_grid
@@ -37,8 +38,8 @@ class Board
     @columns.include?(column)
   end
 
-  def convert_coord(coord)
-    row, column = coord[0], coord[1]
+  def convert_string_to_coord(string)
+    row, column = string[0], string[1]
     [@rows.index(row), column.to_i-1]
   end
 
@@ -55,5 +56,6 @@ class Board
     row, column = coord[0], coord[1]
     @grid[row][column].include?('S')
   end
+
 
 end

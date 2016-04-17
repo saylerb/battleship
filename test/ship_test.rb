@@ -13,15 +13,8 @@ class ShipTest < Minitest::Test
     assert @ship
   end
 
-  def test_at_new_ship_has_no_position
-    skip
-    assert_equal @ship.position, []
-  end
-
-  def test_if_ship_can_take_a_position
-    skip
-    @ship.position = [0, 0]
-    assert_equal [0, 0], @ship.position
+  def test_if_ship_has_coordinates
+    assert_equal [0, 0], @ship.coordinates
   end
 
   def test_if_new_ship_is_not_sunk
@@ -32,5 +25,22 @@ class ShipTest < Minitest::Test
     assert_equal @ship.hits, 0
   end
 
+  def test_if_ship_is_not_sunk
+    refute @ship.sunk
+  end
+
+  def test_if_ship_is_sunk
+    @ship.hit_ship
+    assert @ship.sunk
+  end
+
+  def test_if_ship_has_health
+    @ship.health = 10 
+    assert_equal 10, @ship.health
+  end
+
+  def test_if_ship_has_health
+    assert_equal 1, @ship.health
+  end
 
 end

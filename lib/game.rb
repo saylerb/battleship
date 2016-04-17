@@ -21,7 +21,7 @@ class Game
 
     until @game_over
       guess_sequence
-      if all_my_ships_are_belong_to_computer
+      if all_human_ships_are_belong_to_computer
         @game_over = true
       elsif all_computer_ships_are_belong_to_human
         @game_over = true
@@ -47,31 +47,30 @@ class Game
         valid = true
       end
     end
+
+    @computer_board.display_grid
+
     puts Print.ship_placement_instructions
   end
 
   def set_human_board
-    print "Please enter the squares for your first two-unit ship"
-    selection = gets.chomp
+    print "Please enter the squares for your first single-unit ship >>> "
     
-    @human_board.convert_coord
+    selection_one_coordinates = @human_board.convert_string_to_coord(gets.chomp)
 
-    @human_board.add_ship([x1,y1])
+    @human_board.add_ship(selection_one_coordinates)
+    @human_board.display_grid
 
 
-    print "Please enter the squares for your second two-unit ship"
+    print "Please enter the squares for your single-unit ship"
 
-    print "enter x2: "
-    x2 = gets.chomp.to_i
-    print "enter y2: "
-    y2 = gets.chomp.to_i
+    selection_two_coordinates = @human_board.convert_string_to_coord(gets.chomp)
 
-    if (x1 != x2) || (y1 != y2)
-        human_valid = true
-    end
+    # TODO: validate guess  @human_board.is_occupied?(selection_two)
 
-    @human_board.add_ship([x2,y2])
-    puts "boards are set!(?) ready to play!"
+    @human_board.add_ship(selection_two_coordinates)
+    @human_board.display_grid
+    puts "boards are set! Ready to play!"
   end
 
   def guess_sequence
@@ -80,13 +79,16 @@ class Game
     @computer_board.display_grid
     puts "HUMAN:"
     @human_board.display_grid
-    # user_input = gets.chomp
-    # check_user_input(user_input)
 
-    print "Enter a x: "
-    user_input_x = gets.chomp
-    print "Enter a y: "
-    user_input_y = gets.chomp
+    print "Please enter coorindates for your guess: "
+
+    human_guess = @human_board.convert_string_to_coord(gets.chomp)
+
+    if @computer_board.ships.include?(human_guess)
+      puts "You hit computer's ship!"
+      @human_board.
+
+    end
 
     puts "TODO: check computer board for hits"
 

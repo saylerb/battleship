@@ -1,11 +1,26 @@
 class Ship
 
-  attr_accessor :position, :sunk, :hits
+  attr_reader :coordinates, :sunk, :hits, :health
 
   def initialize(coord)
-    @position = [coord[0], coord[1]]
+    @coordinates = [coord[0], coord[1]]
+    @health = 1
     @hits = 0
-    @sunk = false
   end
 
+
+  def hit_ship
+    unless @health == 0
+      @health -= 1
+    else
+      @sunk = true
+    end
+  end
+
+   def sunk 
+     @health == 0 
+   end
+
 end
+
+
