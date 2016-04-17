@@ -84,9 +84,10 @@ class Game
 
     human_guess = @human_board.convert_string_to_coord(gets.chomp)
 
-    if @computer_board.ships.include?(human_guess)
+    if @computer_board.ships.any? { |ship| ship.coordinates == human_guess }
       puts "You hit computer's ship!"
-      @human_board.
+      @computer_board.ships.find { |ship| ship.coordinates == human_guess}.hit_ship
+      @computer_board.display_grid
 
     end
 

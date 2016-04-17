@@ -35,32 +35,45 @@ class BoardTest < Minitest::Test
     assert_equal ["A","B","C","D"], @board.rows
   end
 
-  def test_placing_ship_on_board
+  def test_placing_human_ship_on_board
     coord = [2, 3]
     @board.add_ship(coord)
-    assert_equal @board.grid[coord.first][coord.last], "S"
+    @board.generate_ocean
+    # @board.display(@board.ocean)
+
+    assert_equal @board.ocean[coord.first][coord.last], "S"
   end
 
-  def test_convert_coord
-    coord_1 = @board.convert_coord("A1")
+  def test_placing_display_hit_on_computer_ship
+    coord = [2, 3]
+    @board.add_ship(coord)
+    @board.ships.find { |ship| ship.coordinates == [2, 3] }.hit_ship
+    @board.generate_target
+    # @board.display(@board.target)
+    
+    assert_equal @board.target[coord.first][coord.last], "X"
+  end
+
+  def test_convert_string_to_coord
+    coord_1 = @board.convert_string_to_coord("A1")
     assert_equal [0, 0], coord_1
 
-    coord_2 = @board.convert_coord("B2")
+    coord_2 = @board.convert_string_to_coord("B2")
     assert_equal  [1, 1], coord_2
 
-    coord_3 = @board.convert_coord("C3")
+    coord_3 = @board.convert_string_to_coord("C3")
     assert_equal  [2, 2], coord_3
 
-    coord_4 = @board.convert_coord("D2")
+    coord_4 = @board.convert_string_to_coord("D2")
     assert_equal  [3, 1], coord_4
   #  @board.display_grid
   end
 
   def test_is_position_on_board?
-    assert @board.is_position_on_board?(@board.convert_coord("A1"))
-    assert @board.is_position_on_board?(@board.convert_coord("B2"))
-    assert @board.is_position_on_board?(@board.convert_coord("C4"))
-    assert @board.is_position_on_board?(@board.convert_coord("A1"))
+    assert @board.is_position_on_board?(@board.convert_string_to_coord("A1"))
+    assert @board.is_position_on_board?(@board.convert_string_to_coord("B2"))
+    assert @board.is_position_on_board?(@board.convert_string_to_coord("C4"))
+    assert @board.is_position_on_board?(@board.convert_string_to_coord("A1"))
   end
 
   def test_is_valid_rows_and_columns
@@ -74,8 +87,11 @@ class BoardTest < Minitest::Test
   def test_is_not_overlapping_with_other_ships
     @board.add_ship([0, 0])
     @board.add_ship([1, 2])
+  
     assert @board.is_occupied?([0, 0])
     assert @board.is_occupied?([1, 2])
+    refute @board.is_occupied?([2, 3])
+    refute @board.is_occupied?([2, 2])
   end
 
 

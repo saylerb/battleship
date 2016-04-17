@@ -1,5 +1,6 @@
 class Board
-  attr_reader :columns, :rows, :grid
+  attr_reader :columns, :rows, :grid, :ocean, :target
+  attr_accessor :ships
 
   def initialize
 
@@ -8,18 +9,34 @@ class Board
     @columns = *(1..4)
     @rows = *("A".."D")
     @grid = Array.new(board_size).map! { Array.new(board_size) {"."}}
+    @ocean = @grid
+    @target = @grid
     @ships = Array.new
     @hits = Array.new
   end
 
-  def display_grid
+  # TODO: dynamically generate grid from information in Ships array
+
+  def generate_ocean
+    @ships.each do |ship|
+      @ocean[ship.coordinates[0]][ship.coordinates[1]] = "S" 
+    end
+  end
+
+  def generate_target
+    @ships.each do |ship|
+      @target[ship.coordinates[0]][ship.coordinates[1]] = "X" if ship.health == 0
+    end
+  end
+
+  def display(grid)
     puts ""
     print "  "
     print @columns.each { |cell| cell }.join(" ")
     puts ""
-    @grid.each_index do |index|
+    grid.each_index do |index|
       print @rows[index] + " "
-      puts @grid[index].each { |cell| cell }.join(" ")
+      puts grid[index].each { |cell| cell }.join(" ")
     end
     puts ""
   end
@@ -45,7 +62,7 @@ class Board
 
   def add_ship(coord)
     @ships << Ship.new(coord)
-    @grid[coord.first][coord.last] = 'S'
+    # @grid[coord.first][coord.last] = 'S'
   end
 
   def is_position_on_board?(coord)
@@ -53,8 +70,7 @@ class Board
   end
 
   def is_occupied?(coord)
-    row, column = coord[0], coord[1]
-    @grid[row][column].include?('S')
+    @ships.any? { |ship| ship.coordinates == coord }
   end
 
 
