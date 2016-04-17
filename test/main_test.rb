@@ -11,7 +11,6 @@ class MainTest < Minitest::Test
     @main = Main.new
   end
 
-
   def test_if_main_exists
     assert @main
   end

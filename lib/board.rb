@@ -29,8 +29,10 @@ class Board
     end
   end
 
-  def display(grid)
-    puts ""
+  def display(grid, title)
+    puts 
+    puts title
+    puts 
     print "  "
     print @columns.each { |cell| cell }.join(" ")
     puts ""

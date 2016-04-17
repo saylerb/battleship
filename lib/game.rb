@@ -48,7 +48,8 @@ class Game
       end
     end
 
-    @computer_board.display_grid
+    @computer_board.generate_target
+    @computer_board.display(@computer_board.target, "SHOTS FIRED")
 
     puts Print.ship_placement_instructions
   end
@@ -59,7 +60,8 @@ class Game
     selection_one_coordinates = @human_board.convert_string_to_coord(gets.chomp)
 
     @human_board.add_ship(selection_one_coordinates)
-    @human_board.display_grid
+    @human_board.generate_ocean
+    @human_board.display(@human_board.ocean, "OCEAN")
 
 
     print "Please enter the squares for your single-unit ship"
@@ -69,16 +71,16 @@ class Game
     # TODO: validate guess  @human_board.is_occupied?(selection_two)
 
     @human_board.add_ship(selection_two_coordinates)
-    @human_board.display_grid
-    puts "boards are set! Ready to play!"
+    @human_board.generate_ocean
+    @human_board.display(@human_board.ocean, "YOUR SHIPS")
+
+    puts "Boards are set! Ready to play!"
   end
 
   def guess_sequence
 
-    puts "COMPUTER:"
-    @computer_board.display_grid
-    puts "HUMAN:"
-    @human_board.display_grid
+    @computer_board.display(@computer_board.target, "SHOTS FIRED")
+    @human_board.display(@human_board.ocean, "YOUR SHIPS")
 
     print "Please enter coorindates for your guess: "
 
