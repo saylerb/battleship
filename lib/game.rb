@@ -50,7 +50,6 @@ class Game
 
     @computer_board.generate_target
     @computer_board.display(@computer_board.target, "SHOTS FIRED")
-
     puts Print.ship_placement_instructions
   end
 
@@ -61,7 +60,7 @@ class Game
 
     @human_board.add_ship(selection_one_coordinates)
     @human_board.generate_ocean
-    @human_board.display(@human_board.ocean, "OCEAN")
+    @human_board.display(@human_board.ocean, "YOUR SHIPS")
 
 
     print "Please enter the squares for your single-unit ship"
@@ -86,9 +85,9 @@ class Game
 
     human_guess = @human_board.convert_string_to_coord(gets.chomp)
 
-    if @computer_board.ships.any? { |ship| ship.coordinates == human_guess }
+    if @computer_board.ships.any? { |ship| ship.coords == human_guess }
       puts "You hit computer's ship!"
-      @computer_board.ships.find { |ship| ship.coordinates == human_guess}.hit_ship
+      @computer_board.ships.find { |ship| ship.coords == human_guess}.hit_ship
       @computer_board.display_grid
 
     end

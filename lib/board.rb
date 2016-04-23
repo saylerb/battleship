@@ -1,3 +1,5 @@
+require "colorize"
+
 class Board
   attr_reader :columns, :rows, :grid, :ocean, :target
   attr_accessor :ships
@@ -19,19 +21,20 @@ class Board
 
   def generate_ocean
     @ships.each do |ship|
-      @ocean[ship.coordinates[0]][ship.coordinates[1]] = "S" 
+      @ocean[ship.coords[0]][ship.coords[1]] = "S" 
     end
   end
 
   def generate_target
     @ships.each do |ship|
-      @target[ship.coordinates[0]][ship.coordinates[1]] = "X" if ship.health == 0
+      @target[ship.coords[0]][ship.coords[1]] = "X" if ship.health == 0
     end
   end
 
   def display(grid, title)
     puts 
-    puts title
+    puts title.colorize(:red) if title == "SHOTS FIRED"
+    puts title.colorize(:blue) if title == "YOUR SHIPS"
     puts 
     print "  "
     print @columns.each { |cell| cell }.join(" ")
@@ -46,7 +49,6 @@ class Board
   def valid_input?(string)
     row, column = string[0], string[1]
     @rows.include?(row) && @column.include?(column)
-    # if rowinclude?(string[0]) && string[1]
   end
 
   def valid_row?(row)
@@ -59,12 +61,11 @@ class Board
 
   def convert_string_to_coord(string)
     row, column = string[0], string[1]
-    [@rows.index(row), column.to_i-1]
+    [@rows.index(row.upcase), column.to_i-1]
   end
 
   def add_ship(coord)
     @ships << Ship.new(coord)
-    # @grid[coord.first][coord.last] = 'S'
   end
 
   def is_position_on_board?(coord)
@@ -72,7 +73,7 @@ class Board
   end
 
   def is_occupied?(coord)
-    @ships.any? { |ship| ship.coordinates == coord }
+    @ships.any? { |ship| ship.coords == coord }
   end
 
 

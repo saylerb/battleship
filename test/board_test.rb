@@ -47,7 +47,7 @@ class BoardTest < Minitest::Test
   def test_placing_display_hit_on_computer_ship
     coord = [2, 3]
     @board.add_ship(coord)
-    @board.ships.find { |ship| ship.coordinates == [2, 3] }.hit_ship
+    @board.ships.find { |ship| ship.coords == [2, 3] }.hit_ship
     @board.generate_target
     # @board.display(@board.target)
     
